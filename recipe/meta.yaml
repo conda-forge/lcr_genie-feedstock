@@ -10,16 +10,16 @@ source:
   sha256: 0284cb51394134a1db9b921168e379fd4c6ae5c7bccf40bf95e8f1b1d9c1abae
 
 build:
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install -vv .
   noarch: python
 
 requirements:
   host:
-    - python =3.7
+    - python {{ python_min }}
     - pip
   run:
-    - python =3.7
+    - python >={{ python_min }}
     - biopython
     - openpyxl
     - pandas
@@ -33,6 +33,7 @@ test:
     - lcr_genie
   requires:
     - pytest
+    - python {{ python_min }}
   commands:
     - python -m lcr_genie --help
     - python -m pytest -v
